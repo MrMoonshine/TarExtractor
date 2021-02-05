@@ -13,7 +13,7 @@ class FileSelect extends FileChooser{
         fileSelectionMode = FileChooser.SelectionMode.FilesOnly
         fileFilter = new FileFilter {
           override def accept(f: File): Boolean = {
-            if(f.isDirectory){
+            if(f.isDirectory || f.toString == null){
               return true
             }
 

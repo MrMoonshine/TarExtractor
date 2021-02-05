@@ -42,7 +42,27 @@ class UI extends Frame {
               arch._1.dumpInto(new File(dstloc).toPath)
               arch._2.dumpInto(new File(dstloc).toPath)
             }catch{
-              case e : Throwable => println("Error occured while extracting")
+                  //The world's ugliest dialog
+              case e : Throwable => {
+                val fbutt = new Button("close")
+                println("Fatal Error occured")
+                //"Fatal error!: Unable to open file. Probably wrong compression"
+                val errdia:Dialog = new Dialog(){
+                  title = "Fatal Error"
+                  contents = new BoxPanel(Orientation.Vertical){
+                    contents += new Label("Fatal error!: Unable to open file. Probably wrong compression"){
+                      preferredSize = new Dimension(500,200)
+                    }
+                    contents += fbutt
+                  }
+                }
+                fbutt.reactions += {
+                  case event.ButtonClicked(_) => errdia.dispose()
+                }
+                errdia.centerOnScreen()
+                errdia.background = Color.red
+                errdia.open()
+              }
             }
           }
         }
