@@ -1,8 +1,10 @@
-import org.apache.commons.compress.compressors.CompressorInputStream
+package backend
+
+import org.apache.commons.compress.compressors.{CompressorException, CompressorInputStream}
 import org.apache.commons.compress.compressors.xz.XZCompressorInputStream
 
 import java.io.InputStream
-import scala.util.{Success, Try}
+import scala.util.{Failure, Success, Try}
 
 class TarXz(filename:String) extends TarGz(filename){
   override protected def uncompress(cstream: InputStream): Either[UnarchiverError, CompressorInputStream] = {
@@ -13,8 +15,8 @@ class TarXz(filename:String) extends TarGz(filename){
       //  .createCompressorInputStream(new BufferedInputStream(xzstream))
     } match {
       case Success(stream) => Right(stream)
-      //case Failure(err: CompressorException) => Left(CompressorError(err))
-      //case Failure(err) => Left(UnexpectedUnarchiverError(err))
+      case Failure(err: CompressorException) => Left(backend.CompressorError(err))
+      case Failure(err) => Left(backend.UnexpectedUnarchiverError(err))
     }
   }
 }

@@ -1,3 +1,5 @@
+package backend
+
 import org.apache.commons.compress.archivers.{ArchiveEntry, ArchiveException, ArchiveInputStream, ArchiveStreamFactory}
 import org.apache.commons.compress.compressors.{CompressorException, CompressorInputStream, CompressorStreamFactory}
 import org.apache.commons.io.input.CloseShieldInputStream
@@ -70,7 +72,7 @@ class TarGz(filename: String){
       if (!Files.isDirectory(destination)) throw new Exception("Destination must be a Directory")
 
       it match {
-        case Left(x) => println("UnarchiverError occured")
+        case Left(x) => println("backend.UnarchiverError occured")
         case Right(x) => {
           println("Created Iterator")
           while (x.hasNext) {
