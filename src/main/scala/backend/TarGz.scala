@@ -89,7 +89,7 @@ class TarGz(filename: String){
               println(s"$destname is a directory")
               if (!Files.exists(dumpf)) Files.createDirectories(dumpf)
             } else {
-              println(s"Extractiong to: $destname")
+              println(s"Extracting to: $destname")
               //println(s"Stream has ${istream.available()} Bytes available")
 
               //Copy Stream to a file of any type
@@ -106,6 +106,7 @@ class TarGz(filename: String){
       }
     } catch {
       case e: OutOfMemoryError => println("Out of Memory! File too big. " + e.getMessage)
+      case e: EOFException => println("Malformed EOF " + e.getMessage)
       case e: IOException => println("IO Error! Nothing will be dumped. " + e.getMessage)
       case e: Exception => println(e.getMessage)
       case e: Throwable => println("Unknown Error: " + e.getMessage)
