@@ -1,5 +1,7 @@
+package UI
+
 import java.awt.Color
-import scala.swing.{BoxPanel, Button, Dialog, Dimension, Label, Orientation, event}
+import scala.swing._
 
 class ErrorDialog(msg:String) extends Dialog{
   val fbutt = new Button("close")
