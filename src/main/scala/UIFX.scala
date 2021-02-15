@@ -1,0 +1,3 @@
+class UIFX extends JFXApp{
+
+}
