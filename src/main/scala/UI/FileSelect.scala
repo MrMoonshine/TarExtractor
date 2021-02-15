@@ -1,3 +1,5 @@
+package UI
+
 import java.io.File
 import javax.swing.filechooser.FileFilter
 import scala.swing.FileChooser
